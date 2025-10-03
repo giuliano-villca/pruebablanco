@@ -33,8 +33,9 @@ while True:
             try:
                 r = requests.get("https://valorant-api.com/v1/agents?isPlayableCharacter=true")
                 data = r.json()
-                agentes = [a["displayName"] for a in data["data"]]
-                mensaje = f"Hola {username}, estos son los agentes de Valorant (no me gusta el juego):\n" + "\n".join(agentes)
+                agentes = [a["displayName"] + " "  + a["description"] for a in data["data"]]
+                habilidad = [b["displayName"] for a in data["data"] for b in a["abilities"] ]
+                mensaje = f"Hola {username}, estos son los agentes de Valorant (no me gusta el juego):\n" + "\n".join(agentes) + f"habiliades:\n" + "\n".join(habilidad) 
             except Exception as e:
                 mensaje = "Error."
 
@@ -49,3 +50,4 @@ while True:
             client_socket.send("Comando no esta mal. /repos o /adios\n".encode())
 
     client_socket.close()
+ 

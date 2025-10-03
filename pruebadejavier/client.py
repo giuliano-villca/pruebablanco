@@ -19,7 +19,7 @@ while True:
     print(mensaje, end="")
     comando = input()
     client_socket.send(comando.encode())
-    respuesta = client_socket.recv(4096).decode()
+    respuesta = client_socket.recv(8000).decode()
     print(respuesta)
     if comando.strip() == "/adios":
         break
